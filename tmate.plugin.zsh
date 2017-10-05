@@ -35,7 +35,7 @@ then
     tmate -S $socket_file wait tmate-ready
     tmate -S $socket_file rename-session -t 0 $session
     print "created tmux session : $session"
-    print "you could attach this session like blow :"
+    print "you could attach this session like below :"
     print " tma $session"
     print
   }
@@ -115,6 +115,11 @@ then
       print "  (print session info to share)"
     fi
 
+  }
+
+  function tmcreate(){
+      tmnew $1
+      tmshare $1 | grep "ssh" | tail -1 | xclip -selection clipboard && print "copied rw ssh session to clipboard" || print "error when copying ssh session to clipboard"
   }
 
   function _tm_list_session() {
